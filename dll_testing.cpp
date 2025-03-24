@@ -360,6 +360,39 @@ bool DLL_print_reverse(){
     return true;
 }
 
+void test_quick_sort_DLL(){
+    DoublyLinkedList dll;
+    dll.push_back(7);
+    dll.push_back(3);
+    dll.push_back(5);
+    dll.push_back(1);
+    dll.push_back(6);
+    dll.push_back(2);
+    dll.push_back(4);
+    std::cout << "Before quick sorting: ";
+    dll.print();
+    dll.quick_sort();
+    std::cout << "After quick sorting: ";
+    dll.print();
+    std::cout << std::endl;
+}
+void test_merge_sort_DLL(){
+    DoublyLinkedList dll;
+    dll.push_back(7);
+    dll.push_back(3);
+    dll.push_back(5);
+    dll.push_back(1);
+    dll.push_back(6);
+    dll.push_back(2);
+    dll.push_back(4);
+    std::cout << "Before merge sorting: ";
+    dll.print();
+    dll.merge_sort();
+    std::cout << "After merge sorting: ";
+    dll.print();
+    std::cout << std::endl;
+}
+
 //main function to run all tests
 int main() {
     assert(DLL_test_print());
@@ -393,7 +426,11 @@ int main() {
 
     std::string result_9 = DLL_test_remove_value() ? "Passed" : "Failed";
     std::cout << "Remove_value: " << result_9 << std::endl;
+
+    test_quick_sort_DLL();
+    test_merge_sort_DLL();
     return 0;
+    
     
 
 }

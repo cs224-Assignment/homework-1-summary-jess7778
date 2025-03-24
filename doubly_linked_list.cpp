@@ -220,12 +220,12 @@ void DoublyLinkedList::quick_sort(DLLNode* start, DLLNode* end){
     if(start == nullptr || end == nullptr || start == tail || start == end->next){
         return;
     }
-    if(start->value <= end->value){
-        return;
-    }
+    //if(start->value <= end->value){
+    //    return;
+    //}
     //Node* tail = get_tail();
     DLLNode* pivot = partition(start, end);
-    std::cout << "P val: " << pivot->value << std::endl;
+    //std::cout << "P val: " << pivot->value << std::endl;
     quick_sort(start, pivot->prev);
     quick_sort(pivot->next, end);
 
@@ -234,7 +234,7 @@ void DoublyLinkedList::quick_sort(DLLNode* start, DLLNode* end){
 DLLNode* DoublyLinkedList::partition(DLLNode* start, DLLNode* end){
 
    DLLNode* pivot = start; //Pivot iwill be the starting value
-   std::cout << "Pivot Value: " << pivot->value << std::endl;
+   //std::cout << "Pivot Value: " << pivot->value << std::endl;
    DLLNode* mid = end->next; // Will find the mid
    // At the end of this loop, the midpoint will be where the pivot should go,
     for(DLLNode* i = end; i != start; i = i->prev){
@@ -246,9 +246,9 @@ DLLNode* DoublyLinkedList::partition(DLLNode* start, DLLNode* end){
                 mid = mid->prev;
             }
             //mid = mid->previous;
-            int temp = mid->value;
-            mid->value = i->value;
-            i->value = temp;
+            int temp = i->value;
+            i->value = mid->value;
+            mid->value = temp;
         }
     }
     if(mid == nullptr){
@@ -262,9 +262,9 @@ DLLNode* DoublyLinkedList::partition(DLLNode* start, DLLNode* end){
         mid = mid->prev;
     }
    //mid = mid->previous;
-   int temp = mid->value;
-   mid->value = start->value;
-   start->value = temp;
+   int temp = pivot->value;
+   pivot->value = mid->value;
+   mid->value = temp;
    
     //std::cout << "New Pivot Value: " << mid->value << std::endl;
     return mid; //Location of pivot
