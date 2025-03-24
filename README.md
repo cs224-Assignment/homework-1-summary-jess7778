@@ -42,7 +42,7 @@ To evaluate sorting performance:
 
 ./sorting_project evaluation_cases.txt
 
-## Sorting Implementations
+# Sorting Implementations
 
 ## VectorSorter
 - Merge Sort (merge_sort): Uses a divide-and-conquer approach.
@@ -65,5 +65,6 @@ assignment.
 
 - Carson Frost
 - Charles Serafin
+- Esther Cai
 - Jessica Sun
 - Joseph Mock
