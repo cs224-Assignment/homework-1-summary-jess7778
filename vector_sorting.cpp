@@ -71,12 +71,64 @@ void merge_sort(std::vector<int>& vecA){
     int right = vecA.size() - 1;
     merge_sort(vecA, left, right);
 }
+
+// ------ ------ ------ ------ 
+
+void VectorSorter::quick_sort(std::vector<int>& vec) {
+    if (!vec.empty()) {
+        quick_sort(vec, 0, vec.size() - 1);
+    }
+}
+
+void VectorSorter::quick_sort(std::vector<int>& vec, int left, int right) {
+    if (left < right) {
+        int pivotIndex = partition(vec, left, right);
+        quick_sort(vec, left, pivotIndex - 1);
+        quick_sort(vec, pivotIndex + 1, right);
+    }
+}
+
+int VectorSorter::partition(std::vector<int>& vec, int left, int right) {
+    int pivot = vec[left];
+    int low = left + 1;
+    int high = right;
+
+    while (low <= high) {
+        while (low <= high && vec[low] <= pivot) {
+            low++;
+        }
+        while (low <= high && vec[high] > pivot) {
+            high--;
+        }
+        if (low < high) {
+            std::swap(vec[low], vec[high]);
+        }
+    }
+    std::swap(vec[left], vec[high]);
+    return high;
+}
+
+void VectorSorter::insertion_sort(std::vector<int>& vec) {
+    for (size_t i = 1; i < vec.size(); i++) {
+        int key = vec[i];
+        int j = i - 1;
+        while (j >= 0 && vec[j] > key) {
+            vec[j + 1] = vec[j];
+            j--;
+        }
+        vec[j + 1] = key;
+    }
+}
+
+// ------ ------ ------ ------ 
+
 void print_vector(std::vector<int>& vecA){
     for(int i = 0; i < vecA.size(); ++i){
         std::cout << vecA[i] << " ";
     }
     std::cout << std::endl;
 }
+
 int main(){
 std::vector<int> vecA;
     vecA.push_back(5);
@@ -89,5 +141,4 @@ std::vector<int> vecA;
     merge_sort(vecA);
     std::cout << "After merge sort: ";
     print_vector(vecA);
-
 }
