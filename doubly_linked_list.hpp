@@ -33,6 +33,13 @@ class DoublyLinkedList {
         bool remove(int i);
         bool remove_value(int v);
         void print();
+        void quick_sort(DLLNode* start, DLLNode* end);
+        void quick_sort();
+        DLLNode* partition(DLLNode* start, DLLNode* end);
+        DLLNode* merge(DLLNode* first, DLLNode* second);
+        void merge_sort();
+        DLLNode* merge_sort(DLLNode* head);
+        DLLNode* split(DLLNode * start);
         DLLNode* get_head() { return head; }
         DLLNode* get_tail(){return tail;}
         void print_reverse();

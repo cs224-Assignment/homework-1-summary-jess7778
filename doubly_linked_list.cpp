@@ -215,3 +215,146 @@ void DoublyLinkedList::print_reverse() {
     }
     std::cout << std::endl;
 }
+//Quick sort implementation
+void DoublyLinkedList::quick_sort(DLLNode* start, DLLNode* end){
+    if(start == nullptr || end == nullptr || start == tail || start == end->next){
+        return;
+    }
+    if(start->value <= end->value){
+        return;
+    }
+    //Node* tail = get_tail();
+    DLLNode* pivot = partition(start, end);
+    std::cout << "P val: " << pivot->value << std::endl;
+    quick_sort(start, pivot->prev);
+    quick_sort(pivot->next, end);
+
+}
+
+DLLNode* DoublyLinkedList::partition(DLLNode* start, DLLNode* end){
+
+   DLLNode* pivot = start; //Pivot iwill be the starting value
+   std::cout << "Pivot Value: " << pivot->value << std::endl;
+   DLLNode* mid = end->next; // Will find the mid
+   // At the end of this loop, the midpoint will be where the pivot should go,
+    for(DLLNode* i = end; i != start; i = i->prev){
+        if(i->value >= pivot->value){
+            if(mid == nullptr){
+                //std::cout << "Null" << std::endl;
+                mid = end;
+            }else{
+                mid = mid->prev;
+            }
+            //mid = mid->previous;
+            int temp = mid->value;
+            mid->value = i->value;
+            i->value = temp;
+        }
+    }
+    if(mid == nullptr){
+        //std::cout << "Null" << std::endl;
+        mid = end;
+    }else{
+        mid = mid->prev;
+    }
+   //mid = mid->previous;
+   int temp = mid->value;
+   mid->value = start->value;
+   start->value = temp;
+   
+    //std::cout << "New Pivot Value: " << mid->value << std::endl;
+    return mid; //Location of pivot
+    
+}
+void DoublyLinkedList::quick_sort(){
+    DLLNode* start = get_head();
+    DLLNode* end = get_tail();
+    quick_sort(start, end);
+}
+//END quick sort implementations
+
+//Merge sort implementation
+DLLNode* DoublyLinkedList::split(DLLNode * start){
+    DLLNode * trail = start;
+    DLLNode * ahead = start;
+    while(ahead->next != nullptr && ahead->next->next != nullptr){
+        ahead = ahead->next->next;
+        trail = trail->next;
+    }
+    // Loop above will go through until ahead ptr is at end, tail is in middle
+    //head is start of forst half, trial is start of second half
+    DLLNode* mid = trail->next;
+    // Need nto break this connection
+    trail->next = nullptr;
+    if(mid != nullptr){
+        mid->prev = nullptr;
+    }
+    
+    //return the pointer for the second half of the split list
+    return mid;
+
+}
+DLLNode* DoublyLinkedList::merge_sort(DLLNode* head){
+//Base case (list has 0 or one value(s) so is already sorted)
+/*
+    if(head == nullptr || head->next == nullptr){
+        return head;
+    }
+    Node* secondList = split(head);
+    head = merge_sort(head);
+    secondList = merge_sort(secondList);
+
+    return merge(head, secondList);
+    */
+   if(head == nullptr || head->next == nullptr){
+        return head;
+   }
+   //Find mid and create two halves
+   //Node* mid = get_mid(head);
+   DLLNode* right = split(head);
+   
+   DLLNode* left = head;
+   
+   
+   //Detatch two halves
+   //mid->next = nullptr;
+   //right->previous = nullptr;
+   //Call merge sort on the left half, left becomes a new head
+   left = merge_sort(left);
+   right = merge_sort(right);
+
+   
+    return merge(left, right);
+}
+void DoublyLinkedList::merge_sort(){
+    head = merge_sort(head);
+}
+//Merging two already sorted lists
+DLLNode* DoublyLinkedList::merge(DLLNode* first, DLLNode* second){
+    //Base case, the first node is null, so nothing for second node to compre to
+    if(first == nullptr){
+        return second;
+    }
+    // Base case, the second node is null, so nothing for the first nose to compare to
+    if(second == nullptr){
+        return first;
+    }
+    if(first->value < second->value){
+        first->next = merge(first->next, second);
+        
+        if(first->next != nullptr){
+            first->next->prev = first;
+        }
+        first->prev = nullptr;
+        return first;
+    }else{
+        second->next = merge(first, second->next);
+        
+        if(second->next != nullptr){
+            second->next->prev = second;
+        }
+        second->prev = nullptr;
+        return second;
+    }
+}
+//End merge sort implementation
