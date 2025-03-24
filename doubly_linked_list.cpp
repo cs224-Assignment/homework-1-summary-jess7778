@@ -254,6 +254,10 @@ DLLNode* DoublyLinkedList::partition(DLLNode* start, DLLNode* end){
     if(mid == nullptr){
         //std::cout << "Null" << std::endl;
         mid = end;
+        int temp = start->value;
+        start->value = mid->value;
+        mid->value = temp;
+        return mid;
     }else{
         mid = mid->prev;
     }
