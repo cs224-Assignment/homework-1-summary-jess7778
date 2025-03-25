@@ -362,3 +362,21 @@ DLLNode* DoublyLinkedList::merge(DLLNode* first, DLLNode* second){
     }
 }
 //End merge sort implementation
+void DoublyLinkedList::insertion_sort(DLLNode* head){
+    for(DLLNode* i = head->next; i != nullptr; i = i->next){
+        int key = i->value;
+        DLLNode* j = i->prev;
+        while(j != nullptr && j->value > key){
+            j->next->value = j->value;
+            j = j->prev;
+        }
+        if(j == nullptr){
+            head->value = key;
+        }else{
+            j->next->value = key;
+        }
+    }
+}
+void DoublyLinkedList::insertion_sort(){
+    insertion_sort(head);
+}

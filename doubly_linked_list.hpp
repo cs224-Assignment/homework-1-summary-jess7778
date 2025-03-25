@@ -43,6 +43,8 @@ class DoublyLinkedList {
         DLLNode* get_head() { return head; }
         DLLNode* get_tail(){return tail;}
         void print_reverse();
+        void insertion_sort(DLLNode* head);
+        void insertion_sort();
 };
 
 #endif

@@ -392,7 +392,22 @@ void test_merge_sort_DLL(){
     dll.print();
     std::cout << std::endl;
 }
-
+void test_insertion_sort_DLL(){
+    DoublyLinkedList dll;
+    dll.push_back(5);
+    dll.push_back(3);
+    dll.push_back(7);
+    dll.push_back(4);
+    dll.push_back(2);
+    dll.push_back(6);
+    dll.push_back(1);
+    std::cout << "Before insertion sorting: ";
+    dll.print();
+    dll.merge_sort();
+    std::cout << "After insertion sorting: ";
+    dll.print();
+    std::cout << std::endl;
+}
 //main function to run all tests
 int main() {
     assert(DLL_test_print());
@@ -429,6 +444,8 @@ int main() {
 
     test_quick_sort_DLL();
     test_merge_sort_DLL();
+    test_insertion_sort_DLL();
+
     return 0;
     
     
