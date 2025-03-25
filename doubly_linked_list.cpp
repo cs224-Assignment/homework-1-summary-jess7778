@@ -301,16 +301,6 @@ DLLNode* DoublyLinkedList::split(DLLNode * start){
 }
 DLLNode* DoublyLinkedList::merge_sort(DLLNode* head){
 //Base case (list has 0 or one value(s) so is already sorted)
-/*
-    if(head == nullptr || head->next == nullptr){
-        return head;
-    }
-    Node* secondList = split(head);
-    head = merge_sort(head);
-    secondList = merge_sort(secondList);
-
-    return merge(head, secondList);
-    */
    if(head == nullptr || head->next == nullptr){
         return head;
    }
