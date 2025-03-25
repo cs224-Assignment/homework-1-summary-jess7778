@@ -16,8 +16,6 @@ private:
     static void merge_sort(std::vector<int>& vec, int left, int right);
     static void merge(std::vector<int>& vec, int left, int mid, int right);
 
-
-
     // Private helper functions for Quick Sort
     static void quick_sort(std::vector<int>& vec, int left, int right);
     static int partition(std::vector<int>& vec, int left, int right);
