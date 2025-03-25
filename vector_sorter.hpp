@@ -2,6 +2,7 @@
 #define VECTOR_SORTER_HPP
 
 #include <vector>
+#include <iostream>
 
 class VectorSorter {
 public:
@@ -14,6 +15,8 @@ private:
     // Private helper functions for Merge Sort
     static void merge_sort(std::vector<int>& vec, int left, int right);
     static void merge(std::vector<int>& vec, int left, int mid, int right);
+
+
 
     // Private helper functions for Quick Sort
     static void quick_sort(std::vector<int>& vec, int left, int right);

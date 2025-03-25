@@ -1,9 +1,27 @@
 #include<iostream>
 #include<vector>
+#include <algorithm>
+#include "vector_sorter.hpp"
+//vector_sorting.cpp
 
-void merge(std::vector<int>& vecA, int left, int right, int mid){
-    
+//Merge sort on vector of integers
+//Originally left is start of vector, right is end of vector (indices)
+void VectorSorter::merge_sort(std::vector<int>& vecA, int left, int right){
+    // if right is greater then nothing has to be sorted
+    if(left < right){
+        int mid = left + (right - left) / 2;
+        
+        //merge sort on left sublist
+        merge_sort(vecA, left, mid);
+        //merge sort on right sublist
+        merge_sort(vecA, mid + 1, right);
 
+        merge(vecA, left, mid, right);
+    }
+}
+
+//Merge function for merge sort
+void VectorSorter::merge(std::vector<int>& vecA, int left, int mid, int right){
     //Need to get the size of both sub arrays to copy data
     int leftSize = mid - left + 1;
     int rightSize = right - mid;
@@ -11,6 +29,7 @@ void merge(std::vector<int>& vecA, int left, int right, int mid){
     //create a sorted vector that will be copied to vecA later
     std::vector<int> leftSortedVec(leftSize);
     std::vector<int> rightSortedVec(rightSize);
+    
     //Copy the data into each sorted sub array
 
     //Left
@@ -18,14 +37,16 @@ void merge(std::vector<int>& vecA, int left, int right, int mid){
         leftSortedVec[i] = vecA[left + i];
         //leftSortedVec.push_back(vecA[left + i]);
     }
+
     //Right
     for(int i = 0; i < rightSize; ++i){
         rightSortedVec[i] = vecA[mid + i + 1];
         //rightSortedVec.push_back(vecA[mid + i + 1]);
-    } //Now have two sorted subarrays
+    } 
+    //Now have two sorted subarrays
 
     // Compare and merge
-    int i = 0; // i tracks position in the lefts sorted subarray
+    int i = 0; // i tracks position in the left sorted subarray
     int j = 0; // j tracks position in the right sorted subarray
     int k = left; // k tracks position in original vector (where the new sorted values need to be put)
     while(i < leftSize && j < rightSize){
@@ -38,6 +59,7 @@ void merge(std::vector<int>& vecA, int left, int right, int mid){
         }
         ++k;
     }
+
     // Now need to copy extra elements that were not compared (now in order)
     while(i < leftSize){
         vecA[k] = leftSortedVec[i];
@@ -49,28 +71,16 @@ void merge(std::vector<int>& vecA, int left, int right, int mid){
         ++j;
         ++k;
     }
-
 }
-//Merge sort on vector of integers
-//Originally left is start of vector, right is end of vector (indices)
-void merge_sort(std::vector<int>& vecA, int left, int right){
-    // if right is greater then nothing has to be sorted
-    if(left < right){
-        int mid = left + (right - left) / 2;
-        
-        //merge sort on left sublist
-        merge_sort(vecA, left, mid);
-        //merge sort on right sublist
-        merge_sort(vecA, mid + 1, right);
 
-        merge(vecA, left, right, mid);
+//Wrapper merge_sort function (entry point for users)
+void VectorSorter::merge_sort(std::vector<int>& vec) {
+    if (!vec.empty()) {
+        merge_sort(vec, 0, vec.size() - 1);
     }
 }
-void merge_sort(std::vector<int>& vecA){
-    int left = 0;
-    int right = vecA.size() - 1;
-    merge_sort(vecA, left, right);
-}
+
+
 
 // ------ ------ ------ ------ 
 
@@ -120,7 +130,7 @@ void VectorSorter::insertion_sort(std::vector<int>& vec) {
     }
 }
 
-// ------ ------ ------ ------ 
+// ------ ------ ------ ------
 
 void print_vector(std::vector<int>& vecA){
     for(int i = 0; i < vecA.size(); ++i){
@@ -130,15 +140,32 @@ void print_vector(std::vector<int>& vecA){
 }
 
 int main(){
-std::vector<int> vecA;
+    std::vector<int> vecA;
     vecA.push_back(5);
     vecA.push_back(4);
     vecA.push_back(3);
     vecA.push_back(2);
     vecA.push_back(1);
+
+    std::vector<int> vecB;
+    vecB.push_back(7);
+    vecB.push_back(2);
+    vecB.push_back(9);
+    vecB.push_back(1);
+    vecB.push_back(6);
+    
     std::cout << "Before merge sort: ";
     print_vector(vecA);
-    merge_sort(vecA);
+    VectorSorter::merge_sort(vecA);
     std::cout << "After merge sort: ";
     print_vector(vecA);
+
+
+    std::cout << "\nBefore quick sort: ";
+    print_vector(vecB);
+
+    VectorSorter::quick_sort(vecB);
+
+    std::cout << "After quick sort: ";
+    print_vector(vecB);
 }

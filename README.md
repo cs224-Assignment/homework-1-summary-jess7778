@@ -65,6 +65,5 @@ assignment.
 
 - Carson Frost
 - Charles Serafin
-- Esther Cai
 - Jessica Sun
 - Joseph Mock
