@@ -2,10 +2,10 @@
 #include<vector>
 #include <algorithm>
 #include "vector_sorter.hpp"
-//vector_sorting.cpp
 
-//Merge sort on vector of integers
-//Originally left is start of vector, right is end of vector (indices)
+// Merge sort on vector of integers
+
+// Originally left is start of vector, right is end of vector (indices)
 void VectorSorter::merge_sort(std::vector<int>& vecA, int left, int right){
     // if right is greater then nothing has to be sorted
     if(left < right){
@@ -20,30 +20,31 @@ void VectorSorter::merge_sort(std::vector<int>& vecA, int left, int right){
     }
 }
 
-//Merge function for merge sort
+// Merge function for merge sort
+
 void VectorSorter::merge(std::vector<int>& vecA, int left, int mid, int right){
-    //Need to get the size of both sub arrays to copy data
+    // Need to get the size of both sub arrays to copy data
     int leftSize = mid - left + 1;
     int rightSize = right - mid;
 
-    //create a sorted vector that will be copied to vecA later
+    // create a sorted vector that will be copied to vecA later
     std::vector<int> leftSortedVec(leftSize);
     std::vector<int> rightSortedVec(rightSize);
     
-    //Copy the data into each sorted sub array
+    // Copy the data into each sorted sub array
 
-    //Left
+    // Left
     for(int i = 0; i < leftSize; ++i){
         leftSortedVec[i] = vecA[left + i];
-        //leftSortedVec.push_back(vecA[left + i]);
+        // leftSortedVec.push_back(vecA[left + i]);
     }
 
-    //Right
+    // Right
     for(int i = 0; i < rightSize; ++i){
         rightSortedVec[i] = vecA[mid + i + 1];
-        //rightSortedVec.push_back(vecA[mid + i + 1]);
+        // rightSortedVec.push_back(vecA[mid + i + 1]);
     } 
-    //Now have two sorted subarrays
+    // Now have two sorted subarrays
 
     // Compare and merge
     int i = 0; // i tracks position in the left sorted subarray
@@ -73,16 +74,12 @@ void VectorSorter::merge(std::vector<int>& vecA, int left, int mid, int right){
     }
 }
 
-//Wrapper merge_sort function (entry point for users)
+// Wrapper merge_sort function (entry point for users)
 void VectorSorter::merge_sort(std::vector<int>& vec) {
     if (!vec.empty()) {
         merge_sort(vec, 0, vec.size() - 1);
     }
 }
-
-
-
-// ------ ------ ------ ------ 
 
 void VectorSorter::quick_sort(std::vector<int>& vec) {
     if (!vec.empty()) {
@@ -129,8 +126,6 @@ void VectorSorter::insertion_sort(std::vector<int>& vec) {
         vec[j + 1] = key;
     }
 }
-
-// ------ ------ ------ ------
 
 void print_vector(std::vector<int>& vecA){
     for(int i = 0; i < vecA.size(); ++i){
