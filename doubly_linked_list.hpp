@@ -45,6 +45,7 @@ class DoublyLinkedList {
         void print_reverse();
         void insertion_sort(DLLNode* head);
         void insertion_sort();
+        DoublyLinkedList(const DoublyLinkedList& other);
 };
 
 #endif

@@ -371,3 +371,13 @@ void DoublyLinkedList::insertion_sort(DLLNode* head){
 void DoublyLinkedList::insertion_sort(){
     insertion_sort(head);
 }
+
+// added copy constructor because we end up copying lists in evaluator class
+DoublyLinkedList::DoublyLinkedList(const DoublyLinkedList& other) {
+    head = tail = nullptr;
+    DLLNode* current = other.head;
+    while (current != nullptr) {
+        push_back(current->value);
+        current = current->next;
+    }
+}
