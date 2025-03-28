@@ -21,6 +21,12 @@ public:
     void PrintTable();
     void Evaluate();
 
+    // some basic methods (basically getters), for testing
+    bool data_loaded() const { return !data1_vec_1.empty(); }
+    bool insertion_tested() const { return dll_insert.avgTime1 != 0; }
+    bool merge_tested() const { return dll_merge.avgTime1 != 0; }
+    bool quick_tested() const { return dll_quick.avgTime1 != 0; }
+
 private:
     // all parameters just provide info to do one variation of the sort for a specific dataset
     void CompareSort(std::vector<int>& vec_1, 
